@@ -1,0 +1,25 @@
+node_modules
+.next
+.git
+.gitignore
+Dockerfile*
+*.log
+.env
+.env.*
+.cache
+coverage
+**/node_modules
+**/.next
+.temp
+.tmp
+
+# OS/Editor junk
+.DS_Store
+Thumbs.db
+.idea
+.vscode
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
