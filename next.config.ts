@@ -1,12 +1,9 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  images: {
-    domains: ['images.unsplash.com', 'assets.aceternity.com'],
-  },
-  eslint: {
-    // Does NOT block the build on eslint errors
-    ignoreDuringBuilds: true,
+import type { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
+  experimental: {
+    serverActions: true,
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
