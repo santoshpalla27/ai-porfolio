@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { Button } from '../ui/button';
-import { ArrowRight, Laugh, BriefcaseBusiness, Layers, UserRoundSearch } from 'lucide-react';
+import { ArrowRight, Laugh, BriefcaseBusiness, Layers, UserRoundSearch, Mail } from 'lucide-react';
 
 const HeadSection = () => {
   // Animation variants from reference project
@@ -68,28 +68,29 @@ const HeadSection = () => {
           resilient systems that power modern applications.
         </motion.p>
         
-        {/* Buttons */}
+        {/* CTA Buttons with better styling */}
         <motion.div 
-          className="flex flex-col sm:flex-row gap-4"
+          className="flex flex-col sm:flex-row gap-4 pt-4"
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
         >
           <Button 
-            variant="glass"
-            className="border border-border bg-white/40 backdrop-blur-sm transition-all hover:bg-white/60 dark:border-white/20 dark:bg-white/20 dark:hover:bg-white/30"
+            size="lg"
+            className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 cursor-pointer"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Get In Touch
+            <Mail className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
           <Button 
+            size="lg"
             variant="outline"
-            className="border border-border bg-white/40 backdrop-blur-sm transition-all hover:bg-white/60 dark:border-white/20 dark:bg-white/20 dark:hover:bg-white/30"
+            className="group border-2 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all duration-300 cursor-pointer"
             onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
           >
             View Projects
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
         </motion.div>
       </motion.div>
