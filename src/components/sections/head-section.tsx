@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { GithubButton } from '../ui/github-button';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { Button } from '../ui/button';
 import { ArrowRight, Laugh, BriefcaseBusiness, Layers, UserRoundSearch } from 'lucide-react';
@@ -127,12 +126,6 @@ const HeadSection = () => {
       {/* Top right controls */}
       <div className="absolute top-6 right-8 z-20 flex items-center gap-2">
         <ThemeToggle />
-        <GithubButton
-          animationDuration={1.5}
-          label="Star"
-          size={'sm'}
-          repoUrl="https://github.com/santoshreddy/devops-portfolio"
-        />
       </div>
 
       {/* Looking for talent button */}
