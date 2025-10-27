@@ -86,7 +86,7 @@ const HeadSection = () => {
           <Button 
             size="lg"
             variant="outline"
-            className="group border-2 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all duration-300 cursor-pointer"
+            className="group border-2 hover:border-blue-500/50 hover:bg-blue-500/20 dark:hover:bg-blue-500/10 transition-all duration-300 cursor-pointer"
             onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
           >
             View Projects
