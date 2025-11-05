@@ -1,5 +1,7 @@
 'use client';
 
+'use client';
+
 import { useState, useRef, useEffect } from 'react';
 import HeadSection from '@/components/sections/head-section';
 import AboutSection from '@/components/sections/about-section';
@@ -9,10 +11,11 @@ import ProjectsSection from '@/components/sections/projects-section';
 import ContactSection from '@/components/sections/contact-section';
 import FluidCursor from '@/components/FluidCursor';
 import BlurredTextBackground from '@/components/BlurredTextBackground';
-import { motion } from 'framer-motion';
+import StickyNav from '@/components/sticky-nav';
+import { Toaster } from 'sonner';
 
-// Define section names
-type SectionName = 'home' | 'about' | 'skills' | 'experience' | 'projects' | 'contact';
+const SECTIONS = ['home', 'about', 'skills', 'experience', 'projects', 'contact'] as const;
+type SectionName = typeof SECTIONS[number];
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState<SectionName>('home');
@@ -26,147 +29,71 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-
-      for (const [sectionName, ref] of Object.entries(sectionRefs)) {
-        if (ref.current) {
-          const sectionTop = ref.current.offsetTop;
-          const sectionHeight = ref.current.offsetHeight;
-          
-          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            setActiveSection(sectionName as SectionName);
-            break;
-          }
-        }
-      }
+    const options = {
+      threshold: 0.5,
+      rootMargin: '0px 0px -50% 0px',
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id as SectionName);
+        }
+      });
+    }, options);
+
+    Object.values(sectionRefs).forEach((ref) => {
+      if (ref.current) observer.observe(ref.current);
+    });
+
+    return () => {
+      Object.values(sectionRefs).forEach((ref) => {
+        if (ref.current) observer.unobserve(ref.current);
+      });
+    };
   }, []);
 
-  const scrollToSection = (sectionName: SectionName) => {
-    sectionRefs[sectionName].current?.scrollIntoView({
-      behavior: 'smooth'
-    });
-  };
-
-  // Animation variants for sections
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-  };
-
-  // Top element animation variants (similar to reference project)
-  const topElementVariants = {
-    hidden: { opacity: 0, y: -60 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { type: 'ease', duration: 0.8 },
-    },
-  };
-
-  // Bottom element animation variants (similar to reference project)
-  const bottomElementVariants = {
-    hidden: { opacity: 0, y: 80 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { type: 'ease', duration: 0.8, delay: 0.2 },
-    },
+  const scrollToSection = (sectionName: string) => {
+    const ref = sectionRefs[sectionName as SectionName];
+    ref.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden relative">
-      {/* Fluid background canvas - this covers the entire page now */}
       <FluidCursor />
-      
-      {/* Big blurred footer text - now visible throughout the page */}
       <BlurredTextBackground text="Santosh" />
       
-      {/* Navigation dots */}
-      <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-50 flex flex-col space-y-4">
-        {(['home', 'about', 'skills', 'experience', 'projects', 'contact'] as SectionName[]).map((section) => (
-          <button
-            key={section}
-            onClick={() => scrollToSection(section)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              activeSection === section ? 'bg-blue-600 scale-125' : 'bg-gray-300'
-            }`}
-            aria-label={`Scroll to ${section} section`}
-          />
-        ))}
+      <div className="scroll-smooth">
+        <div ref={sectionRefs.home} id="home" className="relative z-10">
+          <HeadSection />
+        </div>
+        
+        <div ref={sectionRefs.about} id="about" className="relative z-10">
+          <AboutSection />
+        </div>
+        
+        <div ref={sectionRefs.skills} id="skills" className="relative z-10">
+          <SkillsSection />
+        </div>
+        
+        <div ref={sectionRefs.experience} id="experience" className="relative z-10">
+          <ExperienceSection />
+        </div>
+        
+        <div ref={sectionRefs.projects} id="projects" className="relative z-10">
+          <ProjectsSection />
+        </div>
+        
+        <div ref={sectionRefs.contact} id="contact" className="relative z-10">
+          <ContactSection />
+        </div>
       </div>
 
-      <div className="scroll-smooth">
-        <motion.div 
-          ref={sectionRefs.home} 
-          id="home"
-          variants={topElementVariants}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10"
-        >
-          <HeadSection />
-        </motion.div>
-        
-        <motion.div 
-          ref={sectionRefs.about} 
-          id="about"
-          variants={sectionVariants}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10"
-        >
-          <AboutSection />
-        </motion.div>
-        
-        <motion.div 
-          ref={sectionRefs.skills} 
-          id="skills"
-          variants={sectionVariants}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10"
-        >
-          <SkillsSection />
-        </motion.div>
-        
-        <motion.div 
-          ref={sectionRefs.experience} 
-          id="experience"
-          variants={sectionVariants}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10"
-        >
-          <ExperienceSection />
-        </motion.div>
-        
-        <motion.div 
-          ref={sectionRefs.projects} 
-          id="projects"
-          variants={sectionVariants}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10"
-        >
-          <ProjectsSection />
-        </motion.div>
-        
-        <motion.div 
-          ref={sectionRefs.contact} 
-          id="contact"
-          variants={bottomElementVariants}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10"
-        >
-          <ContactSection />
-        </motion.div>
-      </div>
+      {/* Sticky Bottom Navigation */}
+      <StickyNav activeSection={activeSection} onNavigate={scrollToSection} />
+      
+      {/* Toast notifications */}
+      <Toaster position="top-right" />
     </div>
   );
 }
