@@ -1,200 +1,176 @@
 'use client';
 
-import FluidCursor from '@/components/FluidCursor';
+import { useState, useEffect, Suspense } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import { ArrowRight, Download, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import WelcomeModal from '@/components/welcome-modal';
-import { motion, Variants } from 'framer-motion';
-import {
-  ArrowRight,
-  Cloud,
-  Server,
-  Terminal,
-  Code,
-  UserRoundSearch,
-} from 'lucide-react';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
-import { ThemeToggle } from '@/components/ui/ThemeToggle'; // Import the theme toggle
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import BackgroundGrid from '@/components/BackgroundGrid';
+import FloatingIcons from '@/components/FloatingIcons';
+import ChatWidget from '@/components/ChatWidget';
+import AboutSection from '@/components/sections/AboutSection';
+import ProjectsSection from '@/components/sections/ProjectsSection';
+import SkillsSection from '@/components/sections/SkillsSection';
+import ContactSection from '@/components/sections/ContactSection';
 
-/* ---------- quick-question data ---------- */
-const questions = {
-  Me: 'Who are you? Tell me about your DevOps journey.',
-  Projects: 'What infrastructure projects have you worked on?',
-  Skills: 'What are your DevOps skills? (CI/CD, Cloud, IaC)',
-  Stack: 'What is your tech stack? (AWS, Kubernetes, Terraform)',
-  Contact: 'How can I contact you?',
-} as const;
-
-const questionConfig = [
-  { key: 'Me', color: '#329696', icon: Terminal },
-  { key: 'Projects', color: '#3E9858', icon: Server },
-  { key: 'Skills', color: '#856ED9', icon: Cloud },
-  { key: 'Stack', color: '#B95F9D', icon: Code },
-  { key: 'Contact', color: '#C19433', icon: UserRoundSearch },
-] as const;
-
-/* ---------- component ---------- */
-export default function Home() {
-  const [input, setInput] = useState('');
-  const router = useRouter();
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const goToChat = (query: string) =>
-    router.push(`/chat?query=${encodeURIComponent(query)}`);
-
-  /* hero animations (unchanged) */
-  const topElementVariants: Variants = {
-    hidden: { opacity: 0, y: -60 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { ease: 'easeOut', duration: 0.8 },
-    },
-  };
-  const bottomElementVariants: Variants = {
-    hidden: { opacity: 0, y: 80 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { ease: 'easeOut', duration: 0.8, delay: 0.2 },
-    },
-  };
+function NavBar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    // Précharger les assets du chat en arrière-plan
-    const img = new window.Image();
-    img.src = '/anime-devops-avatar.png';
-
-    // Précharger les vidéos aussi
-    const linkWebm = document.createElement('link');
-    linkWebm.rel = 'preload'; // Note: prefetch au lieu de preload
-    linkWebm.as = 'video';
-    linkWebm.href = '/final_memojis.webm';
-    document.head.appendChild(linkWebm);
-
-    const linkMp4 = document.createElement('link');
-    linkMp4.rel = 'prefetch';
-    linkMp4.as = 'video';
-    linkMp4.href = '/final_memojis_ios.mp4';
-    document.head.appendChild(linkMp4);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navLinks = [
+    { name: 'About', href: '#about' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Contact', href: '#contact' },
+  ];
+
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pb-10 md:pb-20">
-      {/* big blurred footer word */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center overflow-hidden">
-        <div
-          className="hidden bg-gradient-to-b from-neutral-500/10 to-neutral-500/0 bg-clip-text text-[10rem] leading-none font-black text-transparent select-none sm:block lg:text-[16rem]"
-          style={{ marginBottom: '-2.5rem' }}
-        >
-          Santosh
-        </div>
-      </div>
+    <header
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? 'bg-white/80 dark:bg-black/80 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-6'
+        }`}
+    >
+      <div className="container mx-auto px-4 flex items-center justify-between">
+        <a href="#" className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+          Santosh<span className="text-neutral-800 dark:text-white">.Dev</span>
+        </a>
 
-      {/* Theme Toggle only (GitHub button removed) */}
-      <div className="absolute top-6 right-8 z-20 flex items-center gap-2">
-        <ThemeToggle />
-      </div>
-
-      <div className="absolute top-6 left-6 z-20">
-        <button
-          onClick={() => goToChat('Are you looking for a DevOps Engineer?')}
-          className="relative flex cursor-pointer items-center gap-2 rounded-full border bg-white/30 px-4 py-1.5 text-sm font-medium text-black shadow-md backdrop-blur-lg transition hover:bg-white/60 dark:border-white dark:text-white dark:hover:bg-neutral-800"
-        >
-          {/* Green pulse dot */}
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
-          </span>
-          Looking for a DevOps Engineer?
-        </button>
-      </div>
-
-      {/* header */}
-      <motion.div
-        className="z-1 mt-24 mb-8 flex flex-col items-center text-center md:mt-4 md:mb-12"
-        variants={topElementVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <div className="z-100">
-          <WelcomeModal />
-        </div>
-
-        <h2 className="text-secondary-foreground mt-1 text-xl font-semibold md:text-2xl">
-          Hey, I'm Santosh Reddy 👋
-        </h2>
-        <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
-          DevOps Portfolio
-        </h1>
-      </motion.div>
-
-      {/* centre memoji */}
-      <div className="relative z-10 h-52 w-48 overflow-hidden sm:h-72 sm:w-72">
-        <Image
-          src="/anime-devops-avatar.png"
-          alt="Santosh DevOps Avatar"
-          width={2000}
-          height={2000}
-          priority
-          className="translate-y-1 scale-[1.2] object-cover"
-        />
-      </div>
-
-      {/* input + quick buttons */}
-      <motion.div
-        variants={bottomElementVariants}
-        initial="hidden"
-        animate="visible"
-        className="z-10 mt-4 flex w-full flex-col items-center justify-center md:px-0"
-      >
-        {/* free-form question */}
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (input.trim()) goToChat(input.trim());
-          }}
-          className="relative w-full max-w-lg"
-        >
-          <div className="mx-auto flex items-center rounded-full border border-neutral-200 bg-white/30 py-2.5 pr-2 pl-6 backdrop-blur-lg transition-all hover:border-neutral-300 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-neutral-600">
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask me anything about DevOps..."
-              className="w-full border-none bg-transparent text-base text-neutral-800 placeholder:text-neutral-500 focus:outline-none dark:text-neutral-200 dark:placeholder:text-neutral-500"
-            />
-            <button
-              type="submit"
-              disabled={!input.trim()}
-              aria-label="Submit question"
-              className="flex items-center justify-center rounded-full bg-[#0171E3] p-2.5 text-white transition-colors hover:bg-blue-600 disabled:opacity-70 dark:bg-blue-600 dark:hover:bg-blue-700"
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
-              <ArrowRight className="h-5 w-5" />
-            </button>
-          </div>
-        </form>
-
-        {/* quick-question grid */}
-        <div className="mt-4 grid w-full max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3 md:grid-cols-5">
-          {questionConfig.map(({ key, color, icon: Icon }) => (
-            <Button
-              key={key}
-              onClick={() => goToChat(questions[key])}
-              variant="outline"
-              className="border-border hover:bg-border/30 aspect-square w-full cursor-pointer rounded-2xl border bg-white/30 py-8 shadow-none backdrop-blur-lg active:scale-95 md:p-10"
-            >
-              <div className="flex h-full flex-col items-center justify-center gap-1 text-gray-700">
-                <Icon size={22} strokeWidth={2} color={color} />
-                <span className="text-xs font-medium sm:text-sm">{key}</span>
-              </div>
-            </Button>
+              {link.name}
+            </a>
           ))}
+          <ThemeToggle />
+          <Button size="sm" className="rounded-full bg-neutral-900 dark:bg-white text-white dark:text-black hover:bg-neutral-800 dark:hover:bg-neutral-200">
+            Resume <Download size={14} className="ml-2" />
+          </Button>
+        </nav>
+
+        {/* Mobile Menu Toggle */}
+        <div className="flex items-center gap-4 md:hidden">
+          <ThemeToggle />
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2">
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+      </div>
+
+      {/* Mobile Nav */}
+      {mobileMenuOpen && (
+        <div className="absolute top-full left-0 right-0 bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 p-4 md:hidden shadow-xl">
+          <nav className="flex flex-col gap-4">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-lg font-medium text-neutral-600 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 py-2"
+              >
+                {link.name}
+              </a>
+            ))}
+            <Button className="w-full rounded-full bg-neutral-900 dark:bg-white text-white dark:text-black">
+              Resume <Download size={14} className="ml-2" />
+            </Button>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+}
+
+function HeroSection() {
+  return (
+    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="inline-block px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-6">
+              DevOps Engineer & Cloud Architect
+            </span>
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
+              Automating the <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 animate-gradient-x">
+                Future of Cloud
+              </span>
+            </h1>
+            <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8 max-w-2xl leading-relaxed">
+              I build scalable infrastructure, optimize CI/CD pipelines, and ensure reliability for complex distributed systems. Let's turn your manual processes into automated efficiency.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Button size="lg" className="rounded-full h-14 px-8 text-lg bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/25">
+                View Projects <ArrowRight className="ml-2" />
+              </Button>
+              <Button variant="outline" size="lg" className="rounded-full h-14 px-8 text-lg border-2">
+                Contact Me
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-neutral-400"
+      >
+        <span className="text-xs uppercase tracking-widest">Scroll</span>
+        <div className="w-[1px] h-12 bg-gradient-to-b from-neutral-400 to-transparent"></div>
       </motion.div>
-      <FluidCursor />
-    </div>
+    </section>
+  );
+}
+
+export default function Home() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  return (
+    <main className="relative min-h-screen font-sans selection:bg-blue-500/30">
+      {/* Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 origin-left z-50"
+        style={{ scaleX }}
+      />
+
+      <BackgroundGrid />
+      <FloatingIcons />
+
+      <NavBar />
+      <HeroSection />
+      <AboutSection />
+      <ProjectsSection />
+      <SkillsSection />
+      <ContactSection />
+
+      <ChatWidget />
+
+      <footer className="py-8 text-center text-neutral-500 text-sm relative z-10 bg-white/50 dark:bg-black/50 backdrop-blur-sm border-t border-neutral-200 dark:border-neutral-800">
+        <p>© {new Date().getFullYear()} Santosh Reddy. All rights reserved.</p>
+      </footer>
+    </main>
   );
 }
