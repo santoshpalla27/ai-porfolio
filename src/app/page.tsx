@@ -38,8 +38,11 @@ function NavBar() {
         }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <a href="#" className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-          Santosh<span className="text-neutral-800 dark:text-white">.Dev</span>
+        <a href="#" className="text-2xl font-bold font-mono tracking-tighter group flex items-center gap-1">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 group-hover:from-purple-600 group-hover:to-blue-600 transition-all duration-500">
+            Santosh
+          </span>
+          <span className="text-neutral-800 dark:text-white transition-colors group-hover:text-blue-500">.exe</span>
         </a>
 
         {/* Desktop Nav */}
