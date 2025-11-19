@@ -1,100 +1,36 @@
-# 🚀 DevOps Portfolio
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A modern, production-ready DevOps portfolio built with Next.js 14, TypeScript, React Three Fiber, and Framer Motion.
+## Getting Started
 
-## ✨ Features
-
-- ⚡ **Next.js 14** with App Router
-- 🎨 **Tailwind CSS** with custom theme
-- 🎭 **Framer Motion** animations
-- 🎮 **React Three Fiber** 3D graphics
-- 🌙 **Dark/Light** mode
-- 📱 **Fully Responsive**
-- ♿ **Accessible**
-- 🚀 **Optimized Performance**
-
-## 🛠️ Tech Stack
-
-- Next.js 14
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- React Three Fiber
-- Three.js
-- Lucide Icons
-
-## 📦 Installation
+First, run the development server:
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/devops-portfolio.git
-
-# Navigate to project directory
-cd devops-portfolio
-
-# Install dependencies
-npm install
-
-# Run development server
 npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## 🎨 Customization
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-1. **Personal Information**: Update `src/lib/constants.ts` with your personal information
-2. **Projects**: Add your projects in the `PROJECTS` array in `src/lib/constants.ts`
-3. **Skills**: Modify the `SKILLS` array in `src/lib/constants.ts`
-4. **Experience**: Update the `EXPERIENCE` array in `src/lib/constants.ts`
-5. **Colors**: Customize theme in `tailwind.config.ts`
-6. **Images**: Add your profile and project images to `public/images/`
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## 📂 Project Structure
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-```
-src/
-├── app/              # Next.js app directory
-├── components/       # React components
-│   ├── 3d/          # Three.js 3D components
-│   ├── animations/  # Framer Motion variants
-│   ├── layout/      # Layout components
-│   ├── sections/    # Page sections
-│   └── ui/          # UI components
-├── lib/             # Utilities and constants
-├── types/           # TypeScript types
-└── styles/          # Global styles
-```
+## Learn More
 
-## 🚀 Deployment
+To learn more about Next.js, take a look at the following resources:
 
-### Vercel (Recommended)
-```bash
-npm install -g vercel
-vercel
-```
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Netlify
-```bash
-npm run build
-# Deploy the .next folder
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-### Other Platforms
-The application is compatible with any platform that supports Next.js 14 (Vercel, Netlify, AWS, Azure, etc.)
+## Deploy on Vercel
 
-## 📝 License
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-MIT License - feel free to use for your own portfolio!
-
-## 🤝 Contributing
-
-Contributions welcome! Please open an issue first to discuss what you would like to change.
-
----
-
-Built with ❤️ using Next.js, React Three Fiber & Framer Motion
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
