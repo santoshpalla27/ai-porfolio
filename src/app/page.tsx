@@ -12,6 +12,7 @@ import AboutSection from '@/components/sections/AboutSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import SkillsSection from '@/components/sections/SkillsSection';
 import ContactSection from '@/components/sections/ContactSection';
+import HeroAnimation from '@/components/HeroAnimation';
 
 function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -99,33 +100,39 @@ function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="inline-block px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-6">
-              DevOps Engineer & Cloud Architect
-            </span>
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
-              Automating the <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 animate-gradient-x">
-                Future of Cloud
+        <div className="flex flex-col md:flex-row items-center gap-12">
+          <div className="w-full md:w-1/2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <span className="inline-block px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-6">
+                DevOps Engineer & Cloud Architect
               </span>
-            </h1>
-            <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8 max-w-2xl leading-relaxed">
-              I build scalable infrastructure, optimize CI/CD pipelines, and ensure reliability for complex distributed systems. Let's turn your manual processes into automated efficiency.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="rounded-full h-14 px-8 text-lg bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/25">
-                View Projects <ArrowRight className="ml-2" />
-              </Button>
-              <Button variant="outline" size="lg" className="rounded-full h-14 px-8 text-lg border-2">
-                Contact Me
-              </Button>
-            </div>
-          </motion.div>
+              <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
+                Automating the <br />
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 animate-gradient-x">
+                  Future of Cloud
+                </span>
+              </h1>
+              <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8 max-w-2xl leading-relaxed">
+                I build scalable infrastructure, optimize CI/CD pipelines, and ensure reliability for complex distributed systems. Let's turn your manual processes into automated efficiency.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Button size="lg" className="rounded-full h-14 px-8 text-lg bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/25">
+                  View Projects <ArrowRight className="ml-2" />
+                </Button>
+                <Button variant="outline" size="lg" className="rounded-full h-14 px-8 text-lg border-2">
+                  Contact Me
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="w-full md:w-1/2">
+            <HeroAnimation />
+          </div>
         </div>
       </div>
 
