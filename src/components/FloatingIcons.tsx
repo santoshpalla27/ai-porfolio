@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
     AwsIcon,
@@ -30,6 +31,14 @@ const icons = [
 ];
 
 export default function FloatingIcons() {
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    if (!isMounted) return null;
+
     return (
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
             {icons.map(({ Icon, color, delay }, index) => (
