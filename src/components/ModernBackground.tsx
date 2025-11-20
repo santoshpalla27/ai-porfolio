@@ -1,9 +1,28 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
+import BackgroundGrid from "@/components/BackgroundGrid";
 
 export default function ModernBackground() {
+    const { theme, resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return <div className="fixed inset-0 -z-10 h-full w-full bg-white dark:bg-black" />;
+    }
+
+    const isDark = theme === 'dark' || resolvedTheme === 'dark';
+
+    if (!isDark) {
+        return <BackgroundGrid />;
+    }
+
     return (
         <div className="fixed inset-0 -z-10 h-full w-full bg-neutral-900 dark:bg-black overflow-hidden">
             <ShootingStars />
