@@ -101,7 +101,7 @@ function HeroSection() {
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col md:flex-row items-center gap-12">
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/2 md:pl-12 lg:pl-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
