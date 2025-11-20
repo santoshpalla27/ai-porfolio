@@ -35,7 +35,7 @@ function NavBar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? 'bg-white/80 dark:bg-black/80 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-6'
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? 'bg-white/80 dark:bg-black/80 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-4 md:py-6'
         }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
@@ -110,7 +110,7 @@ function HeroSection() {
               <span className="inline-block px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-6">
                 DevOps Engineer & Cloud Architect
               </span>
-              <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight mb-6">
                 Automating the <br />
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 animate-gradient-x">
                   Future of Cloud

@@ -183,7 +183,7 @@ function SpotlightCard({ children, index }: { children: React.ReactNode, index: 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="relative overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 p-8"
+            className="relative overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 p-6 md:p-8"
         >
             <div
                 className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
