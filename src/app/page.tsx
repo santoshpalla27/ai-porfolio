@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowRight, Download, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import BackgroundGrid from '@/components/BackgroundGrid';
+import ModernBackground from '@/components/ModernBackground';
 import FloatingIcons from '@/components/FloatingIcons';
 import ChatWidget from '@/components/ChatWidget';
 import AboutSection from '@/components/sections/AboutSection';
@@ -166,7 +166,7 @@ export default function Home() {
         style={{ scaleX }}
       />
 
-      <BackgroundGrid />
+      <ModernBackground />
       <FloatingIcons />
 
       <NavBar />

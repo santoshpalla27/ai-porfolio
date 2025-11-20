@@ -1,9 +1,16 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Cloud, Server, Database, Globe, Cpu, Shield, Terminal, Code2, GitBranch } from 'lucide-react';
 
 export default function HeroAnimation() {
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
     return (
         <div className="relative w-full h-[400px] flex items-center justify-center">
             {/* Central Cloud */}
@@ -37,7 +44,7 @@ export default function HeroAnimation() {
             <OrbitingIcon icon={Shield} delay={5} radius={180} duration={25} reverse color="text-purple-500" bg="bg-purple-500/10" />
 
             {/* Floating Particles */}
-            {[...Array(5)].map((_, i) => (
+            {isMounted && [...Array(5)].map((_, i) => (
                 <motion.div
                     key={i}
                     className="absolute w-2 h-2 bg-blue-400/30 rounded-full"
