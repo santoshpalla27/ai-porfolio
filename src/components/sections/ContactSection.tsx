@@ -123,14 +123,14 @@ export default function ContactSection() {
                             <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4">Follow me on</p>
                             <div className="flex gap-4">
                                 {[
-                                    { icon: Github, href: "#", color: "hover:text-black dark:hover:text-white" },
-                                    { icon: Linkedin, href: "#", color: "hover:text-[#0077b5]" },
-                                    { icon: Twitter, href: "#", color: "hover:text-[#1DA1F2]" }
+                                    { icon: Github, href: "#", className: "hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black" },
+                                    { icon: Linkedin, href: "#", className: "hover:bg-[#0077b5] hover:text-white" },
+                                    { icon: Twitter, href: "#", className: "hover:bg-[#1DA1F2] hover:text-white" }
                                 ].map((social, index) => (
                                     <a
                                         key={index}
                                         href={social.href}
-                                        className={`p-3 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 transition-all duration-300 hover:scale-110 ${social.color}`}
+                                        className={`p-3 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 transition-all duration-300 hover:scale-110 cursor-pointer ${social.className}`}
                                     >
                                         <social.icon size={20} />
                                     </a>
