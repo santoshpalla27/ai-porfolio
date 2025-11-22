@@ -131,11 +131,14 @@ function HeroSection() {
                   <Button
                     size="lg"
                     className="relative overflow-hidden rounded-full h-14 px-8 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white shadow-[0_0_20px_rgba(37,99,235,0.5)] hover:shadow-[0_0_30px_rgba(37,99,235,0.7)] transition-all duration-300 border-none group cursor-pointer"
+                    asChild
                   >
-                    <span className="relative z-10 flex items-center">
-                      View Projects <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 skew-y-12" />
+                    <a href="#projects">
+                      <span className="relative z-10 flex items-center">
+                        View Projects <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                      <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 skew-y-12" />
+                    </a>
                   </Button>
                 </motion.div>
 
@@ -147,8 +150,11 @@ function HeroSection() {
                     variant="outline"
                     size="lg"
                     className="rounded-full h-14 px-8 text-lg border-2 border-neutral-300 dark:border-neutral-700 hover:border-blue-500 dark:hover:border-blue-400 bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/20 text-neutral-700 dark:text-white transition-all duration-300 backdrop-blur-sm cursor-pointer"
+                    asChild
                   >
-                    Contact Me
+                    <a href="#contact">
+                      Contact Me
+                    </a>
                   </Button>
                 </motion.div>
               </div>
