@@ -58,9 +58,11 @@ function NavBar() {
             </a>
           ))}
           <ThemeToggle />
-          <Button size="sm" className="rounded-full bg-neutral-900 dark:bg-white text-white dark:text-black hover:bg-neutral-800 dark:hover:bg-neutral-200">
-            Resume <Download size={14} className="ml-2" />
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button className="rounded-full px-6 bg-gradient-to-r from-neutral-900 to-neutral-800 dark:from-white dark:to-neutral-200 text-white dark:text-black hover:shadow-lg transition-all duration-300 border border-transparent hover:border-blue-500/50 cursor-pointer">
+              Resume <Download size={14} className="ml-2" />
+            </Button>
+          </motion.div>
         </nav>
 
         {/* Mobile Menu Toggle */}
@@ -86,9 +88,11 @@ function NavBar() {
                 {link.name}
               </a>
             ))}
-            <Button className="w-full rounded-full bg-neutral-900 dark:bg-white text-white dark:text-black">
-              Resume <Download size={14} className="ml-2" />
-            </Button>
+            <motion.div whileTap={{ scale: 0.95 }}>
+              <Button className="w-full rounded-full bg-gradient-to-r from-neutral-900 to-neutral-800 dark:from-white dark:to-neutral-200 text-white dark:text-black shadow-md cursor-pointer">
+                Resume <Download size={14} className="ml-2" />
+              </Button>
+            </motion.div>
           </nav>
         </div>
       )}
@@ -120,12 +124,33 @@ function HeroSection() {
                 I build scalable infrastructure, optimize CI/CD pipelines, and ensure reliability for complex distributed systems. Let's turn your manual processes into automated efficiency.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="rounded-full h-14 px-8 text-lg bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/25">
-                  View Projects <ArrowRight className="ml-2" />
-                </Button>
-                <Button variant="outline" size="lg" className="rounded-full h-14 px-8 text-lg border-2">
-                  Contact Me
-                </Button>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    size="lg"
+                    className="relative overflow-hidden rounded-full h-14 px-8 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white shadow-[0_0_20px_rgba(37,99,235,0.5)] hover:shadow-[0_0_30px_rgba(37,99,235,0.7)] transition-all duration-300 border-none group cursor-pointer"
+                  >
+                    <span className="relative z-10 flex items-center">
+                      View Projects <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 skew-y-12" />
+                  </Button>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="rounded-full h-14 px-8 text-lg border-2 border-neutral-300 dark:border-neutral-700 hover:border-blue-500 dark:hover:border-blue-400 bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/20 text-neutral-700 dark:text-white transition-all duration-300 backdrop-blur-sm cursor-pointer"
+                  >
+                    Contact Me
+                  </Button>
+                </motion.div>
               </div>
             </motion.div>
           </div>

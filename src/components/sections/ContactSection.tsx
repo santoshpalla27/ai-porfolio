@@ -199,7 +199,7 @@ export default function ContactSection() {
                             <Button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full py-6 text-lg rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg shadow-blue-500/25 transition-all duration-300 transform hover:-translate-y-1"
+                                className="w-full py-6 text-lg rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg shadow-blue-500/25 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
                             >
                                 {isSubmitting ? (
                                     <span className="flex items-center gap-2">
