@@ -39,7 +39,7 @@ const responses = {
         </div>
     ),
     stack: "My daily drivers are AWS for cloud, Terraform for IaC, Kubernetes for orchestration, and Jenkins/GitHub Actions for CI/CD.",
-    contact: "You can reach me via email at santosh@example.com or connect with me on LinkedIn.",
+    contact: "You can reach me via email at santoshpalla2002@gmail.com or connect with me on LinkedIn.",
 };
 
 export default function ChatWidget() {

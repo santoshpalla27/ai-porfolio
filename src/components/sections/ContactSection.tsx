@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Linkedin, Github, Twitter, Send, Copy, Check, MapPin, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 export default function ContactSection() {
     const [formState, setFormState] = useState({
@@ -15,26 +16,43 @@ export default function ContactSection() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleCopyEmail = () => {
-        navigator.clipboard.writeText('santosh@example.com');
+        navigator.clipboard.writeText('santoshpalla2002@gmail.com');
         setIsCopied(true);
         setTimeout(() => setIsCopied(false), 2000);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate sending or construct mailto
-        const subject = `Portfolio Contact from ${formState.name}`;
-        const body = `Name: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}`;
-        const mailtoLink = `mailto:santosh@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        try {
+            const response = await fetch("https://formsubmit.co/ajax/santoshpalla2002@gmail.com", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    name: formState.name,
+                    email: formState.email,
+                    message: formState.message,
+                    _subject: `Portfolio Contact from ${formState.name}`,
+                    _template: "table"
+                })
+            });
 
-        window.location.href = mailtoLink;
-
-        setTimeout(() => {
+            if (response.ok) {
+                toast.success('Message sent successfully! Please check your email to activate if this is your first time.');
+                setFormState({ name: '', email: '', message: '' });
+            } else {
+                throw new Error('Failed to send message');
+            }
+        } catch (error) {
+            console.error('FormSubmit Error:', error);
+            toast.error('Failed to send message. Please try again.');
+        } finally {
             setIsSubmitting(false);
-            setFormState({ name: '', email: '', message: '' });
-        }, 1000);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -81,7 +99,7 @@ export default function ContactSection() {
                             <div>
                                 <h3 className="text-2xl font-bold mb-2">Contact Information</h3>
                                 <p className="text-neutral-600 dark:text-neutral-400">
-                                    Fill out the form or reach out directly via email or social media.
+                                    Fill out the form to message me directly, or click the email below to send a message from your own mail client.
                                 </p>
                             </div>
 
@@ -93,8 +111,8 @@ export default function ContactSection() {
                                     <div className="flex-1">
                                         <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-1">Email</p>
                                         <div className="flex items-center gap-2 group">
-                                            <a href="mailto:santosh@example.com" className="text-lg font-semibold hover:text-blue-600 transition-colors">
-                                                santosh@example.com
+                                            <a href="mailto:santoshpalla2002@gmail.com" className="text-lg font-semibold hover:text-blue-600 transition-colors">
+                                                santoshpalla2002@gmail.com
                                             </a>
                                             <button
                                                 onClick={handleCopyEmail}
@@ -166,7 +184,7 @@ export default function ContactSection() {
 
                             <div className="space-y-2">
                                 <label htmlFor="email" className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                                    Email Address
+                                    Your Email Address
                                 </label>
                                 <input
                                     type="email"

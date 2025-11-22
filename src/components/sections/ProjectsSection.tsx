@@ -89,6 +89,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
                     src={project.image}
                     alt={project.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transform group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute bottom-4 left-4 z-20">
