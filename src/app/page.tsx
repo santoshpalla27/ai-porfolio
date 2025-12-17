@@ -59,7 +59,7 @@ function NavBar() {
           ))}
           <ThemeToggle />
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button className="rounded-full px-6 bg-gradient-to-r from-neutral-900 to-neutral-800 dark:from-white dark:to-neutral-200 text-white dark:text-black hover:shadow-lg transition-all duration-300 border border-transparent hover:border-blue-500/50 cursor-pointer">
+            <Button className="rounded-full px-6 py-2.5 bg-gradient-to-r from-neutral-900 to-neutral-800 dark:from-white dark:to-neutral-200 text-white dark:text-black hover:shadow-lg transition-all duration-300 border border-transparent hover:border-blue-500/50 cursor-pointer">
               Resume <Download size={14} className="ml-2" />
             </Button>
           </motion.div>
@@ -89,7 +89,7 @@ function NavBar() {
               </a>
             ))}
             <motion.div whileTap={{ scale: 0.95 }}>
-              <Button className="w-full rounded-full bg-gradient-to-r from-neutral-900 to-neutral-800 dark:from-white dark:to-neutral-200 text-white dark:text-black shadow-md cursor-pointer">
+              <Button className="w-full rounded-full py-2.5 bg-gradient-to-r from-neutral-900 to-neutral-800 dark:from-white dark:to-neutral-200 text-white dark:text-black shadow-md cursor-pointer">
                 Resume <Download size={14} className="ml-2" />
               </Button>
             </motion.div>
