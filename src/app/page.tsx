@@ -12,7 +12,7 @@ import AboutSection from '@/components/sections/AboutSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import SkillsSection from '@/components/sections/SkillsSection';
 import ContactSection from '@/components/sections/ContactSection';
-import HeroAnimation from '@/components/HeroAnimation';
+import HeroVisuals from '@/components/HeroVisuals';
 
 function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -162,7 +162,7 @@ function HeroSection() {
           </div>
 
           <div className="w-full md:w-1/2">
-            <HeroAnimation />
+            <HeroVisuals />
           </div>
         </div>
       </div>
