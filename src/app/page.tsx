@@ -149,7 +149,7 @@ function HeroSection() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="rounded-full h-14 px-8 text-lg border-2 border-neutral-300 dark:border-neutral-700 hover:border-blue-500 dark:hover:border-blue-400 bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/20 text-neutral-700 dark:text-white transition-all duration-300 backdrop-blur-sm cursor-pointer"
+                    className="rounded-full h-14 px-8 text-lg border-2 border-neutral-300 dark:border-neutral-700 bg-transparent hover:border-black dark:hover:border-white hover:bg-black dark:hover:bg-white text-neutral-700 dark:text-white hover:text-white dark:hover:text-black transition-all duration-300 backdrop-blur-sm cursor-pointer shadow-sm hover:shadow-md"
                     asChild
                   >
                     <a href="#contact">
